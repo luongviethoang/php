@@ -43,14 +43,14 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
         //prepare an insert statement
         $sql = "UPDATE books SET name=?, author=?, price=? WHERE id=?";
 
-        if ($stmt = mysqli_prepare($link, $sql)){
+        if ($stmt = mysqli_prepare($Link, $sql)){
             //Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt,"sssi",$param_name, $param_author, $param_price, $param_id);
 
             // Set parameters
             $param_name = $name;
-            $param_address = $author;
-            $param_salary = $price;
+            $param_author = $author;
+            $param_price = $price;
             $param_id = $id;
 
             //attempt tp execute the prepared statement
@@ -66,7 +66,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
         mysqli_stmt_close($stmt);
     }
     //close connection
-    mysqli_close($link);
+    mysqli_close($Link);
 }else{
     //check existence of id parameter before processing further
     if (isset($_GET["id"]) && !empty(trim($_GET["id"]))){
@@ -75,7 +75,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
 
         //Prepare a select statement
         $sql = "SELECT * FROM books WHERE id=?";
-        if ($stmt = mysqli_prepare($link, $sql)){
+        if ($stmt = mysqli_prepare($Link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -106,7 +106,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
         //close statement
         mysqli_stmt_close($stmt);
         //close connection
-        mysqli_close($link);
+        mysqli_close($Link);
     }else{
         //URL doesn't contain id parameter. Redirect to error page
         header("location: error.php");

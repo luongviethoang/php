@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     //validate address
     $input_author = trim($_POST["author"]);
     if (empty($input_author)){
-        $address_err = 'Please enter an author';
+        $author_err = 'Please enter an author';
     }else{
         $author = $input_author;
     }
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         //prepare an insert statement
         $sql = "INSERT INTO books (name, author, price) VALUES (?, ?, ?)";
 
-        if ($stmt = mysqli_prepare($link, $sql)){
+        if ($stmt = mysqli_prepare($Link , $sql)){
             //Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt,"sss",$param_name, $param_author, $param_price);
 
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_stmt_close($stmt);
     }
     //close connection
-    mysqli_close($link);
+    mysqli_close($Link);
 }
 ?>
 
@@ -97,12 +97,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group <?php echo (!empty($author_err))  ? 'has-error' : ''; ?>">
                             <label>Author</label>
-                            <textarea name="address" class="form-control"><?php echo $author; ?></textarea>
+                            <textarea name="author" class="form-control"><?php echo $author; ?></textarea>
                             <span class="help-block"><?php echo $author_err; ?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($price_err))  ? 'has-error' : ''; ?>">
                             <label>Price</label>
-                            <input type="text" name="salary" class="form-control" value="<?php echo $price; ?>">
+                            <input type="text" name="price" class="form-control" value="<?php echo $price; ?>">
                             <span class="help-block"><?php echo $price_err; ?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value = "Submit">
